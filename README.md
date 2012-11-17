@@ -2,6 +2,8 @@
 
 A set of scripts for producing a nicely formatted summary of a document in PDF form from a simple text file. The summary is organized according to the page numbers in the original (PDF) document and includes links to those pages in the original.
 
+This system was inspired by [Walton Jones's method][4] of summarizing academic papers.
+
 
 ## Simple text file ##
 
@@ -29,8 +31,9 @@ Of the header lines at the top, only Title and File are required. I often use th
 
 The other lines account for the possibilities that the page numbers printed on the original document don't always correspond to the page numbers in the PDF and that PDFs are often formatted as two-up or four-up, with more than one logical page per physical page.
 
-The body of summary consists of several stanzas, each starting with a line giving the page number(s) and followed by a brief description of what's on that page. Hyphens are used to indicate page ranges.
+The body of the summary consists of several stanzas, each starting with a line giving the page number(s) and followed by a brief description of what's on that page. Hyphens are used to indicate page ranges.
 
+I describe how I go about dictating the body of the summary in [this blog post][3]. 
 
 ## Scripts ##
 
@@ -64,3 +67,5 @@ The page numbers in `example-summary.pdf` will be links to the corresponding pag
 
 [1]: http://plessl.github.com/wkpdf/
 [2]: http://skim-app.sourceforge.net/
+[3]: http://www.leancrew.com/all-this/2012/11/notes-on-notes/
+[4]: http://drosophiliac.com/2012/09/an-academic-notetaking-workflow.html
