@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+import re
+from sys import stdin
+from subprocess import check_output
+
+# Read in file and process header lines.
+params = {'File': '', 'Title': '',
+          'Starting page': 1, 'Starting sheet': 1, 'Pages per sheet': 1}
+header, body = stdin.read().split('\n\n', 1)
+for line in header.split('\n'):
+  key, value  = line.split(':', 1)
+  value = value.strip()
+  if value.isdigit():
+    value = int(value)
+  params[key] = value
+
+# Regular expression and function for finding page numbers and making links.
+pageRE = re.compile(r'^((\d+)(-\d+)?)$')
+
+def pageLink(match):
+  'Turn page number match into a Markdown link to the original document.'
+  pdfpage = ((int(match.group(2)) - params['Starting page'])
+              / params['Pages per sheet']
+              + params['Starting sheet'])
+  return '[Page %s](%s#page=%d)  ' % (match.group(1), params['File'], pdfpage)
+
+print '''# %(Title)s #
+''' % params
+
+if 'Subtitle' in params:
+  print '''## %(Subtitle)s ##
+''' % params
+
+
+for line in body.split('\n'):
+  print pageRE.sub(pageLink, line.rstrip())

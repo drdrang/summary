@@ -1,0 +1,6 @@
+#!/bin/bash
+
+f="${1%.*}"
+~/git/summary/summary2md < $1 | php ~/git/summary/summary.php > $f.html
+wkpdf --source $f.html --output $f.pdf --paper letter --margins 72
+rm $f.html
